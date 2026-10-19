@@ -9,6 +9,10 @@
 
 当前示例中的个人信息均为占位内容，正文为简短使用说明，正式提交前请替换。
 
+> [!NOTE]
+>
+> 最新模板可前往 GitHub [NKU-Thesis](https://github.com/InfinityUniverse0/NKU-Thesis) 获取。
+
 ## 目录结构
 
 ```text

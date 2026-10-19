@@ -1,0 +1,21 @@
+% -*- coding: utf-8 -*-
+% 本模板的附录命令直接接收标题，与标准 book 的用法不同。
+\appendix{补充说明}
+\label{app:build}
+
+附录可用于放置补充推导、较长代码或其他不适合放入正文的材料。使用 \verb|\appendix{...}| 设置附录标题；如需多个附录，可继续使用此命令。
+
+在项目根目录运行以下命令即可编译：
+\begin{lstlisting}[language=bash]
+latexmk -xelatex main.tex
+\end{lstlisting}
+
+未使用 latexmk 时，依次运行：
+\begin{lstlisting}[language=bash]
+xelatex main.tex
+biber main
+xelatex main.tex
+xelatex main.tex
+\end{lstlisting}
+
+编译结果为 \path{main.pdf}。不需要附录时，注释 \path{main.tex} 中的附录引入语句即可。

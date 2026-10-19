@@ -1,0 +1,224 @@
+% -*- coding: utf-8 -*-
+% 南开大学本科毕业论文 LaTeX 模板；使用 XeLaTeX + Biber 编译。
+\documentclass[12pt,openright]{book}
+
+\usepackage{ifxetex}
+\ifxetex
+  \usepackage[bookmarksnumbered]{hyperref}
+\else
+  \usepackage[unicode,bookmarksnumbered]{hyperref}
+\fi
+% 上下2.54cm；左右3.17cm；页眉1.5cm；页脚1.75cm
+\usepackage{geometry}
+\usepackage[emptydoublepage]{NKUThesis}           % 中文
+% \usepackage[emptydoublepage,English]{NKUThesis} % 英文
+% 参考文献沿用模板的 NKUThesis 样式，按正文中的引用顺序排列。
+\usepackage[maxnames=3,minnames=3,sorting=none,style=NKUThesis]{biblatex}
+
+\hypersetup{
+  colorlinks=true,
+  pdfborder=0 0 1,
+  citecolor=black,
+  linkcolor=black,
+  pdftitle={南开大学本科毕业论文 LaTeX 模板使用说明},
+  pdfauthor={},
+  pdfsubject={本科毕业论文模板使用说明},
+  pdfkeywords={南开大学,本科毕业论文,LaTeX模板}
+}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.13}
+\usepackage[labelsep=space]{caption}
+\DeclareCaptionFont{wuhao}{\fontsize{10.5}{12}\selectfont}
+\captionsetup{font=wuhao}
+\captionsetup[figure]{justification=centering}
+\usepackage{subfigure}
+\usepackage{color,xcolor}
+\usepackage{listings}
+% 普通程序代码：五号字、单倍行距，带边框、行号和语法高亮。
+% 使用 lstlisting 的 language 选项指定语言，如 Python、C++、bash。
+\definecolor{NKTCodeBackground}{HTML}{F7F8FA}
+\definecolor{NKTCodeBorder}{HTML}{CBD2D9}
+\definecolor{NKTCodeKeyword}{HTML}{1F4E79}
+\definecolor{NKTCodeComment}{HTML}{50734C}
+\definecolor{NKTCodeString}{HTML}{9C3D10}
+\definecolor{NKTCodeNumber}{HTML}{666666}
+\lstset{
+  basicstyle=\linespread{1}\fontsize{10.5}{12}\selectfont\ttfamily,
+  lineskip=0pt,
+  keywordstyle=\color{NKTCodeKeyword}\bfseries,
+  commentstyle=\color{NKTCodeComment}\itshape,
+  stringstyle=\color{NKTCodeString},
+  backgroundcolor=\color{NKTCodeBackground},
+  frame=single,
+  rulecolor=\color{NKTCodeBorder},
+  framerule=0.4pt,
+  framesep=5pt,
+  xleftmargin=24pt,
+  xrightmargin=6pt,
+  framexleftmargin=18pt,
+  numbers=left,
+  numberstyle=\normalfont\fontsize{8}{10}\selectfont\color{NKTCodeNumber},
+  numbersep=7pt,
+  stepnumber=1,
+  firstnumber=1,
+  tabsize=4,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  breaklines=true,
+  breakatwhitespace=false,
+  aboveskip=8pt,
+  belowskip=8pt,
+}
+\usepackage{tikz}
+\usepackage{setspace}
+% 算法伪代码沿用正文小四号；普通程序代码使用 lstlisting。
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{cases}
+\usepackage{tabularx}
+
+% 绘图配色与图案，可供正文中的图表使用。
+\definecolor{corange}{HTML}{FF9666}
+\definecolor{lblue}{HTML}{97FFFF}
+\definecolor{cblue}{HTML}{AB82FF}
+\definecolor{cred}{HTML}{FF99A1}
+\definecolor{cgreen}{HTML}{7ACCBE}
+\definecolor{red1}{RGB}{254,67,101}
+\definecolor{red2}{RGB}{252,157,154}
+\definecolor{red3}{RGB}{249,205,173}
+\definecolor{grey1}{RGB}{200,200,169}
+\definecolor{grey2}{RGB}{131,175,155}
+\definecolor{color1}{HTML}{0099CC}
+\definecolor{color2}{HTML}{F9B46F}
+\definecolor{cblue1}{HTML}{0074D9}
+\definecolor{lblue1}{HTML}{99CCFF}
+\definecolor{corange1}{HTML}{FFDDCE}
+\definecolor{corange2}{HTML}{FF9900}
+\definecolor{corange3}{HTML}{FF9966}
+\definecolor{corange4}{HTML}{FF6600}
+\definecolor{cred2}{HTML}{FF6666}
+\usetikzlibrary{patterns}
+
+\addbibresource{references.bib}
+% 参考文献表只列出正文实际引用的条目。
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
+% 按章编号的定理类环境；名称和编号的字体由 NKUThesis.sty 设置。
+\newtheorem{Theorem}{\hskip 2em 定理}[chapter]
+\newtheorem{Lemma}[Theorem]{\hskip 2em 引理}
+\newtheorem{Corollary}[Theorem]{\hskip 2em 推论}
+\newtheorem{Proposition}[Theorem]{\hskip 2em 命题}
+\newtheorem{Definition}[Theorem]{\hskip 2em 定义}
+\newtheorem{Example}[Theorem]{\hskip 2em 例}
+\newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+\renewcommand{\algorithmicrequire}{\textbf{输入：}}
+\renewcommand{\algorithmicensure}{\textbf{输出：}}
+\algnewcommand{\LeftComment}[1]{\Statex \(\triangleright\) #1}
+\floatname{algorithm}{算法}
+\newcommand{\innersection}[2]{\noindent\textbf{#1. #2}\par}
+
+% 提示词示例框；其中的正文及 verbatim 片段沿用小四号。
+\usepackage[many,breakable,skins]{tcolorbox}
+\newcounter{myboxcounter}[chapter]
+\renewcommand{\themyboxcounter}{\thechapter.\arabic{myboxcounter}}
+\tcbset{
+  promptbox_base/.style={
+    colback=gray!10,
+    colframe=gray!50!black,
+    boxrule=1.0pt,
+    arc=2mm,
+    left=5pt,
+    right=5pt,
+    top=5pt,
+    bottom=5pt,
+    fonttitle=\bfseries,
+    enhanced,
+  }
+}
+\makeatletter
+\newenvironment{promptbox}[2][]{%
+  \refstepcounter{myboxcounter}%
+  \edef\@currentlabel{\themyboxcounter}%
+  \begin{tcolorbox}[
+    promptbox_base,
+    breakable, % 允许跨页
+    title={例 \themyboxcounter: #2},
+    title after break={例 \themyboxcounter: #2（续）}, % 添加续标题
+    #1
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+\makeatother
+
+\usepackage{pifont}
+
+% 自定义颜色
+\definecolor{safeGreen}{rgb}{0.0,0.5,0.0}    % 深绿色
+\definecolor{unsafeRed}{rgb}{0.8,0.0,0.0}    % 深红色
+\definecolor{niceOrange}{rgb}{0.95,0.5,0.15} % 橙色
+\definecolor{niceBlue}{rgb}{0.0,0.35,0.7}    % 蓝色
+\usepackage{hhline}
+
+\begin{document}
+
+% 设置封面基本信息：以下均为占位内容，请按实际情况填写。
+% 注意：英文逗号“,”是字段分隔符。字段内容含英文逗号时，
+% 请用花括号保护该逗号（如 {,}），或包围整个字段值（如 {Title, Subtitle}）。
+\NKTsetup{
+  % 中英文题目可手动分成两行；不需要第二行时填“无”，该行将不显示。
+  论文题目(中文) = 南开大学本科毕业论文模板使用说明,
+  论文题目(中文)(第二行) = 无,
+  论文题目(英文) = Nankai University Undergraduate Thesis Template,
+  论文题目(英文)(第二行) = User Guide,
+  学号 = 0000000,
+  姓名 = 姓名,
+  % 年级填写入学年份（4位数字）；“级”为显示后缀，一般保留。
+  年级 = 0000,
+  级 = 级,
+  专业 = 专业名称,
+  系别 = 系别名称,
+  学院 = 学院名称,
+  % 导师按“姓名\quad 职称”填写；\quad 用于在姓名与职称间留空。
+  指导教师 = 教师姓名\quad 职称,
+  % 有校外导师时填写，没有则填“无”。
+  % 示例：校外导师 = 教师姓名\quad 职称（单位名称）,
+  校外导师 = 无,
+  % “论文完成时间”填写年份，“月份”填写月份数字；“年”“月”为显示后缀。
+  % 若已在月份值中写入“月”字，则应将“月”字段留空，避免重复显示。
+  论文完成时间 = 0000,
+  年 = 年,
+  月份 = 5,
+  月 = 月,
+  % 无后缀的信息栏共用此空值，请保留为空。
+  空后缀 =
+}
+
+\include{tex/abstract}
+\tableofcontents
+
+\begin{spacing}{1.5}
+\include{tex/body}
+
+% 附录位于正文之后、参考文献之前；无附录时可注释下一行。
+\include{tex/appendix}
+
+% 参考文献
+\clearpage
+\phantomsection
+\zihaowu
+\printbibliography[category=cited]
+
+\include{tex/acknowledgements}
+
+\end{spacing}
+
+\end{document}

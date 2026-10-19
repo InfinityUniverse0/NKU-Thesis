@@ -1,0 +1,69 @@
+% -*- coding: utf-8 -*-
+% 正文从这里开始；可直接替换本文件，也可在 tex/ 中继续拆分章节。
+\chapter{模板使用说明}
+\label{chap:guide}
+
+\section{适用范围}
+本模板面向南开大学\textbf{计算机学院}和\textbf{密码与网络空间安全学院}的本科毕业论文，主要参考《南开大学本科毕业论文（设计）指导手册（2025）》\upcite{nku-guide-2025}以及《本科生论文格式要求补充规定2023V2》\upcite{nku-supplement-2023}。其他学院使用时，可能需要按本学院要求修改。
+
+\section{文件与编译}
+在 \path{main.tex} 中填写封面信息，在 \path{tex/abstract.tex} 中填写摘要，在本文件中撰写正文。插图放入 \path{figures/}，文献条目写入 \path{references.bib}。使用 XeLaTeX 和 Biber 编译，具体命令见项目 README 和附录。
+
+\subsection{标题与交叉引用}
+使用 \verb|\chapter|、\verb|\section| 和 \verb|\subsection| 组织三级标题。为图、表、公式添加 \verb|\label|，再用 \verb|\ref| 引用，避免手工填写编号。
+
+\subsection{中英文文献引用}
+文献使用 \verb|\cite| （行内引用\cite{BERT}） 或上标引用命令 \verb|\upcite| （上标引用\upcite{BERT}）。推荐使用 \verb|\upcite{条目键}| 作上标引用。中文文献示例：赵月等总结了大语言模型的安全现状与挑战\upcite{ZW-AQTZ}。英文文献示例：Devlin 等提出了 BERT 预训练方法\upcite{BERT}。
+
+上述条目位于 \path{references.bib}，对应的条目键为 \verb|ZW-AQTZ| 和 \verb|BERT|。同一处引用多篇文献时，在 \verb|\upcite| 中用英文逗号分隔条目键，多条文献引用显示效果\upcite{Transformer,LoRA,DeepSeek-R1}。
+
+\chapter{基本排版示例}
+
+\section{公式与定义}
+下面给出均值公式的排版示例：
+\begin{equation}
+  \bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i.
+  \label{eq:mean}
+\end{equation}
+式~\ref{eq:mean} 的编号随章节自动生成。定义、定理和引理可分别使用 \verb|Definition|、\verb|Theorem| 和 \verb|Lemma| 环境。
+\begin{Definition}
+样本均值是所有样本数值之和与样本数量之比。
+\end{Definition}
+
+\section{图表}
+图~\ref{fig:placeholder} 是插图占位示例。实际插图时，将方框替换为 \verb|\includegraphics| 命令，并在图下方填写图题。
+\begin{figure}[htbp]
+  \centering
+  % 例如：\includegraphics[width=0.6\linewidth]{figures/example.pdf}
+  \fbox{\parbox[c][16mm][c]{0.6\linewidth}{\centering 插图占位示意}}
+  \caption{插图示例}
+  \label{fig:placeholder}
+\end{figure}
+
+表~\ref{tab:example} 演示三线表。表题放在表格上方，表格内容的字号由模板设置。
+\begin{table}[htbp]
+  \centering
+  \caption{表格示例}
+  \label{tab:example}
+  \begin{tabular}{lc}
+    \toprule
+    项目 & 示例值 \\
+    \midrule
+    样本数量 & 3 \\
+    样本均值 & 2 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{程序代码}
+普通程序代码使用 \verb|lstlisting|，保持五号字、单倍行距，并显示边框、行号和语法高亮。通过 \verb|language=Python| 等选项指定语言，例如：
+
+\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Python]
+# Calculate the mean of a nonempty list.
+def mean(values):
+    return sum(values) / len(values)
+
+print("Mean:", mean([1, 2, 3]))
+\end{lstlisting}
+\end{minipage}
